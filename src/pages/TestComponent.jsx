@@ -1,7 +1,10 @@
+import Auth from "./Auth";
+import AuthLogin from "./AuthLogin";
+
 function TestComponent(){
     return(
         <>
-            <h1>hii i am TestComponent</h1>
+            <AuthLogin />
         </>
     )
 }

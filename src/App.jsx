@@ -7,6 +7,7 @@ import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Order from './pages/Order'
+import TestComponent from './pages/TestComponent'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +19,7 @@ function App() {
         <Route path='/auth' element={<Auth />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/test" element={<TestComponent />} />
       </Routes>
     </>
   )
