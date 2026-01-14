@@ -2,17 +2,23 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { Route, Routes } from 'react-router-dom'
+import Auth from './pages/Auth'
+import Home from './pages/Home'
+import Cart from './pages/Cart'
+import Order from './pages/Order'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <p class="text-3xl font-bold underline">heyy wassup</p>
-
-      <div className="bg-chestnut h-64 w-full border-2 border-violet-600 rounded-md my-4 flex justify-center items-center">
-        <h1 className='text-center font-mono font-extrabold'>hello world</h1>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path='/auth' element={<Auth />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Order />} />
+      </Routes>
     </>
   )
 }
