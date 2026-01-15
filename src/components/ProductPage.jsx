@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 
 const ProductPage = (props) => {
-  const [ quantity, setQuantity ] = useState(0); 
+  const [ quantity, setQuantity ] = useState(1); 
   const [ validDecrementButton, setValidDecrementButton ] = useState(false); 
   const [ validIncrementButton, setValidIncrementButton ] = useState(true); 
+
+  const [error, setError] = useState(""); 
+
+  const idToSend = props.id; 
 
   const decrementQuantity = () => {
       setQuantity(prev => Math.max(prev - 1, 0)); 
@@ -11,6 +15,29 @@ const ProductPage = (props) => {
 
   const incrementQuantity = (presentQuantity) => {
       setQuantity(prev => Math.min(prev + 1, props.availableQuantity)); 
+  }
+
+  async function addToCart() {
+    try{
+      const token = localStorage.getItem("token"); 
+      
+      const response = await fetch("http://localhost:8080/cart/", {
+        method: "POST", 
+        headers: {
+          "Content-Type" : "application/json",
+           "Authorization": `Bearer ${token}`,
+        }, 
+        body: JSON.stringify(
+          {
+            productId : idToSend, 
+            quantity : quantity
+          }
+        )
+      })
+    }
+    catch(err){
+      setError(err.message); 
+    }
   }
   
   return (
@@ -42,13 +69,13 @@ const ProductPage = (props) => {
                       <div>
                         <p>Quantity</p>
  
-                        <button className='text-white bg-black px-2 m-1' onClick={decrementQuantity}>-</button>                       
+                        <button className='text-white bg-black px-2 m-1 cursor-pointer' onClick={decrementQuantity}>-</button>                       
                         <span>{quantity}</span>
-                        <button className='text-white px-2 m-1 bg-black' onClick={incrementQuantity}>+</button>
+                        <button className='text-white px-2 m-1 bg-black cursor-pointer' onClick={incrementQuantity}>+</button>
                       </div>
 
                       {/* TODO : I have to add the functionality of adding into a cart later i.e. add to cart */}
-                      <button className='inline-block'>
+                      <button onClick={addToCart} className='bg-black text-white rounded-md cursor-pointer'> 
                         Add to Cart
                       </button>
                       

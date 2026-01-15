@@ -12,6 +12,7 @@ function TestComponent(){
                 price="89"
                 longDesc="Handcrafted ceramic vase with a modern minimalist design. Perfect for dried flowers or as a standalone decorative piece."
                 availableQuantity="15"
+                id="1"
             />
         </>
     )
