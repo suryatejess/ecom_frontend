@@ -1,3 +1,4 @@
+import ProductsTogether from "../components/ProductsTogether";
 import SignOutButton from "../components/SignOutButton";
 
 function Home(){
@@ -5,9 +6,11 @@ function Home(){
     
     return(
         <>
-            <h1>hii i am home</h1>
-
-            { isLoggedIn && <SignOutButton /> }
+            <div className="pl-12 mt-6">
+                <h1 className="text-lg font-bold">Products</h1>
+                <p className="text-sm font-light">Thoughtfully designed essentials for everyday life</p>
+            </div>
+            <ProductsTogether />
         </>
     )
 }

@@ -8,12 +8,15 @@ import Home from './pages/Home'
 import Cart from './pages/Cart'
 import Order from './pages/Order'
 import TestComponent from './pages/TestComponent'
+import Navbar from './components/Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path='/auth' element={<Auth />} />

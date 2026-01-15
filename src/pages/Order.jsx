@@ -1,7 +1,6 @@
 function Order(){
     return(
         <>
-            <h1>hii i am order</h1>
         </>
     )
 }

@@ -3,20 +3,18 @@ import Signin from './Signin';
 import SignOutButton from './SignOutButton';
 import.meta.env.VITE_API_BASE_URL
 
-const Navbar = ( {token, setToken} ) => {
-    const isLoggedIn =  !!token;
-    
-    console.log(import.meta.env.VITE_API_BASE_URL);
+const Navbar = () => {
+    const isLoggedIn =  !!localStorage.getItem("token"); 
 
-    // const navigate = useNavigate();
+    // console.log(import.meta.env.VITE_API_BASE_URL);
     
     return (
-        <div className='flex flex-row justify-between'>
-            <a href="/">HOME</a>
+        <div className='flex flex-row justify-between border-b-2 mb-2'>
+            <a href="/">STORE</a>
 
             <div>
                 <a href="/cart">Cart</a>
-                { isLoggedIn ? <SignOutButton setToken={setToken} /> : <Signin />}
+                { isLoggedIn ? <SignOutButton /> : <Signin />}
             </div>
         </div>
     )
