@@ -6,7 +6,7 @@ const ProductPage = (props) => {
   const [ validIncrementButton, setValidIncrementButton ] = useState(true); 
 
   const decrementQuantity = () => {
-      setQuantity(prev => Math.min(prev - 1, 0)); 
+      setQuantity(prev => Math.max(prev - 1, 0)); 
   }
 
   const incrementQuantity = (presentQuantity) => {
