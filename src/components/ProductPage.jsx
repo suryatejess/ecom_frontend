@@ -26,7 +26,7 @@ const ProductPage = (props) => {
             </a>
 
             {/* down */}
-            <div className='grid grid-cols-2 mt-4'>
+            <div className='grid grid-rows-2 sm:grid-cols-2 mt-4'>
 
                 {/* image  */}
                 <img src={props.image} alt="here the image of the product is supposed to be there" />
