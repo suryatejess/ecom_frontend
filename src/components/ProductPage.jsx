@@ -34,7 +34,7 @@ const ProductPage = (props) => {
     };
 
     const incrementQuantity = (presentQuantity) => {
-        setQuantity((prev) => Math.min(prev + 1, props.availableQuantity));
+        setQuantity((prev) => Math.min(prev + 1, product.availableQuantity));
     };
 
     async function addToCart() {
