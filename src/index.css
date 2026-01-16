@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 @theme {
-  --color-chestnut: lightblue; 
+    --color-chestnut: lightblue;
 }

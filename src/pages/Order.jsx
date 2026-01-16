@@ -1,8 +1,5 @@
-function Order(){
-    return(
-        <>
-        </>
-    )
+function Order() {
+    return <></>;
 }
 
-export default Order; 
+export default Order;

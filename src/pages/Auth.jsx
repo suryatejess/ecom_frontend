@@ -1,11 +1,11 @@
 import AuthLogin from "./AuthLogin";
 
-function Auth(){
-    return(
+function Auth() {
+    return (
         <>
             <AuthLogin />
         </>
-    )
+    );
 }
 
-export default Auth; 
+export default Auth;
