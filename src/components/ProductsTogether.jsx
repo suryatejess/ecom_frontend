@@ -49,6 +49,10 @@ const ProductsTogether = () => {
                   image={product.image}
                   name={product.name}
                   price={product.price}
+                  id={product.id}
+                  availableQuantity={product.availableQuantity}
+                  longDesc={product.longDesc}
+                  shortDesc={product.shortDesc}
                 />
                )
              )

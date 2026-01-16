@@ -9,6 +9,7 @@ import Cart from './pages/Cart'
 import Order from './pages/Order'
 import TestComponent from './pages/TestComponent'
 import Navbar from './components/Navbar'
+import ProductPage from './components/ProductPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
         <Route path="/test" element={<TestComponent />} />
+         <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
     </>
   )
