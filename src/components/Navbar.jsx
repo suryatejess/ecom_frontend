@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Signin from "./Signin";
 import SignOutButton from "./SignOutButton";
 import.meta.env.VITE_API_BASE_URL;
@@ -6,6 +6,46 @@ import.meta.env.VITE_API_BASE_URL;
 const Navbar = () => {
     const isLoggedIn = !!localStorage.getItem("token");
     const [totalCartQuantity, setTotalCartQuantity] = useState(0);
+    const [error, setError] = useState("");
+
+    const url_getAllProductsInCart = "http://localhost:8080/cart/";
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            findTotalCartQuantity();
+        } else {
+            setTotalCartQuantity(0);
+        }
+    }, [isLoggedIn]);
+
+    const findTotalCartQuantity = async () => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(url_getAllProductsInCart, {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(
+                    "failed to fetch all the cart items of this user",
+                );
+            }
+
+            const data = await response.json();
+
+            const total = data.reduce((sum, item) => sum + item.quantity, 0);
+
+            setTotalCartQuantity(total);
+
+            console.log(data);
+        } catch (error) {
+            setError(error);
+        }
+    };
 
     // console.log(import.meta.env.VITE_API_BASE_URL);
 

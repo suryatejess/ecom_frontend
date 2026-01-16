@@ -1,6 +1,26 @@
 import React from "react";
 
 const ProductCard = (props) => {
+    async function addToCart() {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch("http://localhost:8080/cart/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    productId: props.id,
+                    quantity: 1,
+                }),
+            });
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
     return (
         <>
             <div className="flex flex-col mx-4">
@@ -17,7 +37,10 @@ const ProductCard = (props) => {
 
                     {/* TODO : when button onClick add to cart */}
                     {/* button to add to cart */}
-                    <button className="absolute bottom-3 right-3 rounded-md bg-black text-white flex items-center justify-center transition-opacity px-4 py-3">
+                    <button
+                        onClick={addToCart}
+                        className="absolute bottom-3 right-3 rounded-md bg-black text-white flex items-center justify-center transition-opacity px-4 py-3 cursor-pointer hover:bg-amber-600 hover:scale-110"
+                    >
                         +
                     </button>
                 </a>
