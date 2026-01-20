@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import CartItem from "../components/CartItem";
 import OrderSummary from "../components/OrderSummary";
+import SignInFirstComponent from "../components/SignInFirstComponent";
 
 function Cart() {
     const isLoggedIn = !!localStorage.getItem("token");
+
+    if (!isLoggedIn) {
+        return <SignInFirstComponent name="Cart" />;
+    }
+
     const [allProducts, setAllProducts] = useState([]);
     const [error, setError] = useState("");
     const [subtotal, setSubtotal] = useState("xyz");
@@ -41,7 +47,7 @@ function Cart() {
 
     return (
         <>
-            <h1>i am cart so what?</h1>
+            {/* <h1>i am cart so what?</h1> */}
 
             {/* load products into a data */}
             {/* just display all the properties */}
