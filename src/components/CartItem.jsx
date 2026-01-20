@@ -17,7 +17,7 @@ const CartItem = (props) => {
         // setProductQuantity();
 
         findProductBasedOnId();
-    }, []);
+    }, [props.productId]);
 
     async function findProductBasedOnId() {
         try {
@@ -37,20 +37,47 @@ const CartItem = (props) => {
         }
     }
 
-    const decrementQuantity = () => {
-        setProductQuantity((prev) => Math.max(prev - 1, 0));
+    async function updateQuantityBasedOnProductId(newQuantity) {
+        console.log("newQuantity : " + newQuantity);
+        console.log("pops.productId : " + props.productId);
 
-        // TODO : call the update api here
-        // maybe you could add a button for `update`
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(`${backendUrl}/cart/`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({
+                    productId: props.productId,
+                    quantity: newQuantity,
+                }),
+            });
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
+    const decrementQuantity = () => {
+        const newQuantity = Math.max(productQuantity - 1, 0);
+
+        setProductQuantity(newQuantity);
+
+        updateQuantityBasedOnProductId(newQuantity);
     };
 
     const incrementQuantity = () => {
-        setProductQuantity((prev) =>
-            Math.min(prev + 1, product.availableQuantity),
+        if (!product) return;
+
+        const newQuantity = Math.min(
+            productQuantity + 1,
+            product.availableQuantity,
         );
 
-        // TODO : call the update api here
-        // maybe you could add a button for `update`
+        setProductQuantity(newQuantity);
+        updateQuantityBasedOnProductId(newQuantity);
     };
 
     const clearCartAfterHittingCrossButton = async () => {
