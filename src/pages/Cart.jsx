@@ -12,13 +12,48 @@ function Cart() {
 
     const [allProducts, setAllProducts] = useState([]);
     const [error, setError] = useState("");
-    const [subtotal, setSubtotal] = useState("xyz");
+    const [subtotal, setSubtotal] = useState(0);
 
     const url_getAllProductsInCart = "http://localhost:8080/cart/";
 
     useEffect(() => {
         findAllProducts();
     }, []);
+
+    useEffect(() => {
+        calcTotalCost();
+    }, [allProducts]);
+
+    const calcTotalCost = async () => {
+        try {
+            if (allProducts.length === 0) {
+                setSubtotal(0);
+                return;
+            }
+
+            const productTotals = await Promise.all(
+                allProducts.map(async (item) => {
+                    const productRes = await fetch(
+                        `http://localhost:8080/product/${item.productId}`,
+                    );
+
+                    if (!productRes.ok) {
+                        throw new Error("failed to fetch product");
+                    }
+
+                    const product = await productRes.json();
+
+                    return product.price * item.quantity;
+                }),
+            );
+
+            const total = productTotals.reduce((sum, value) => sum + value, 0);
+
+            setSubtotal(total);
+        } catch (error) {
+            setError(error);
+        }
+    };
 
     const findAllProducts = async () => {
         try {
