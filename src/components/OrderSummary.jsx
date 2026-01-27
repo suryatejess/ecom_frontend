@@ -98,7 +98,7 @@ const OrderSummary = (props) => {
                 <button
                     onClick={placeOrder}
                     // className="w-full bg-black text-white py-2 rounded"
-                    className="w-full h-12 rounded-lg bg-black text-white text-sm font-medium"
+                    className="w-full h-12 rounded-lg bg-black text-white text-sm font-medium cursor-pointer"
                 >
                     Checkout
                 </button>

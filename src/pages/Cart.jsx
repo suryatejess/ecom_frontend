@@ -15,6 +15,7 @@ function Cart() {
     const [subtotal, setSubtotal] = useState(0);
 
     const url_getAllProductsInCart = "http://localhost:8080/cart/";
+    const url_clearCartItems = "http://localhost:8080/cart/";
 
     useEffect(() => {
         findAllProducts();
@@ -79,6 +80,25 @@ function Cart() {
         }
     };
 
+    const clearCartItemsFunction = async () => {
+        const token = localStorage.getItem("token");
+
+        try {
+            const response = fetch(url_clearCartItems, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(response.status);
+            }
+        } catch (error) {
+            setError(error);
+        }
+    };
+
     return (
         <>
             {/* <div className="grid lg:grid-cols-3 gap-12"> */}
@@ -109,11 +129,31 @@ function Cart() {
 
                     {/* order summary */}
                     <div className="lg:col-span-1">
-                        {/* TODO : When cart is empty, OrderSummary should not be rendered and should show a message saying you have nothing in your cart */}
-                        <OrderSummary subtotal={subtotal} />
+                        {allProducts.length === 0 ? (
+                            <p className="text-gray-500 text-sm">
+                                You have nothing in your cart.
+                            </p>
+                        ) : (
+                            <OrderSummary subtotal={subtotal} />
+                        )}
                     </div>
 
                     {/* this is differentiating line */}
+
+                    {/* clear cart button - render only when there are any products in the cart */}
+                    <div className="lg:col-span-1">
+                        {allProducts.length === 0 ? (
+                            <></>
+                        ) : (
+                            // <OrderSummary subtotal={subtotal} />
+                            <button
+                                onClick={clearCartItemsFunction}
+                                className="w-full bg-black text-white py-2 rounded cursor-pointer"
+                            >
+                                clear cart
+                            </button>
+                        )}
+                    </div>
                 </div>
             </div>
             {/* </div> */}
