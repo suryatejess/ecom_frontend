@@ -14,8 +14,6 @@ const CartItem = (props) => {
     const [productPrice, setProductPrice] = useState("");
 
     useEffect(() => {
-        // setProductQuantity();
-
         findProductBasedOnId();
     }, [props.productId]);
 
@@ -29,9 +27,6 @@ const CartItem = (props) => {
             setProductImage(data.image);
             setProductName(data.name);
             setProductPrice(data.price);
-
-            // const temp = data.availableQuantity;
-            // setTotalQuantityInInventory(temp);
         } catch (err) {
             setError(err.message);
         }
@@ -93,9 +88,9 @@ const CartItem = (props) => {
 
     return (
         <>
-            <div className="flex gap-4 py-4 border-b">
+            <div className="flex gap-4 py-6 border-b border-gray-200">
                 {/* image */}
-                <div className="h-24 w-24 overflow-hidden rounded-lg">
+                <div className="h-24 w-24 overflow-hidden rounded-xl bg-gray-100">
                     <img
                         className="h-full w-full object-cover"
                         src={productImage}
@@ -111,7 +106,10 @@ const CartItem = (props) => {
                             <h3 className="text-sm font-medium">
                                 {productName}
                             </h3>
-                            <p className="text-sm mt-1">{productPrice}</p>
+                            {/* <p className="text-sm mt-1">{productPrice}</p> */}
+                            <p className="text-sm text-gray-500 mt-1">
+                                ₹{productPrice}
+                            </p>
                         </div>
 
                         <button
@@ -137,7 +135,8 @@ const CartItem = (props) => {
                     </div>
 
                     {/* quantity modifier */}
-                    <div className="mt-auto flex items-center gap-2">
+                    {/* <div className="mt-auto flex items-center gap-2"> */}
+                    <div className="mt-4 flex items-center gap-3">
                         <button
                             onClick={decrementQuantity}
                             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8"

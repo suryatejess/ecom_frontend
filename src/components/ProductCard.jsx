@@ -6,9 +6,10 @@ const ProductCard = (props) => {
 
     return (
         <>
-            <div className="flex flex-col mx-4">
+            <div className="flex flex-col">
                 {/* CARD */}
-                <div className="border-2 p-0 aspect-square relative mb-4 overflow-hidden rounded-lg">
+                {/* <div className="p-0 aspect-square relative mb-4 overflow-hidden rounded-lg"> */}
+                <div className="relative aspect-square mb-4 overflow-hidden rounded-xl bg-gray-100">
                     {/* IMAGE LINK */}
                     <a
                         href={`/product/${props.id}`}
@@ -25,8 +26,13 @@ const ProductCard = (props) => {
 
                 {/* NAME & PRICE */}
                 <div>
-                    <h3 className="text-sm font-light">{props.name}</h3>
-                    <p className="text-sm font-medium">{props.price}</p>
+                    <h3 className="text-sm font-normal text-gray-800">
+                        {props.name}
+                    </h3>
+                    <p className="text-sm font-medium text-gray-900 mt-1">
+                        <span>₹</span>
+                        {props.price}
+                    </p>
                 </div>
             </div>
         </>

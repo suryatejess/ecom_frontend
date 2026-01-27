@@ -3,7 +3,7 @@ import React from "react";
 const Signin = () => {
     return (
         <>
-            <a href="/auth">Signin</a>
+            <a href="/auth">Sign in</a>
         </>
     );
 };

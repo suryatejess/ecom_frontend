@@ -48,7 +48,6 @@ function Cart() {
             );
 
             const total = productTotals.reduce((sum, value) => sum + value, 0);
-
             setSubtotal(total);
         } catch (error) {
             setError(error);
@@ -82,28 +81,42 @@ function Cart() {
 
     return (
         <>
-            {/* <h1>i am cart so what?</h1> */}
+            {/* <div className="grid lg:grid-cols-3 gap-12"> */}
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="mb-8">
+                    <a
+                        href="/"
+                        className="text-sm text-gray-500 hover:text-gray-900 flex items-center gap-2 mt-5"
+                    >
+                        ← Continue shopping
+                    </a>
 
-            {/* load products into a data */}
-            {/* just display all the properties */}
-            {/* build the UI for it and then slowly use it */}
-
-            <div className="grid lg:grid-cols-3 gap-12">
-                <div className="lg:col-span-2">
-                    {allProducts.map((item) => (
-                        <CartItem
-                            key={item.productId}
-                            productId={item.productId}
-                            productQuantity={item.quantity}
-                        />
-                    ))}
+                    <h1 className="mt-4 text-2xl font-semibold">Cart</h1>
                 </div>
 
-                {/* order summary */}
-                <div className="lg:col-span-1">
-                    <OrderSummary subtotal={subtotal} />
+                <div className="grid lg:grid-cols-3 gap-12">
+                    {/* this is differentiating line */}
+
+                    <div className="lg:col-span-2">
+                        {allProducts.map((item) => (
+                            <CartItem
+                                key={item.productId}
+                                productId={item.productId}
+                                productQuantity={item.quantity}
+                            />
+                        ))}
+                    </div>
+
+                    {/* order summary */}
+                    <div className="lg:col-span-1">
+                        {/* TODO : When cart is empty, OrderSummary should not be rendered and should show a message saying you have nothing in your cart */}
+                        <OrderSummary subtotal={subtotal} />
+                    </div>
+
+                    {/* this is differentiating line */}
                 </div>
             </div>
+            {/* </div> */}
         </>
     );
 }

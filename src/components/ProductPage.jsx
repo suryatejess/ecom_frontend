@@ -93,7 +93,10 @@ const ProductPage = (props) => {
                         <div>
                             <div className="flex flex-col">
                                 <h1>{product.name}</h1>
-                                <h3>{product.price}</h3>
+                                <h3>
+                                    <span>₹</span>
+                                    {product.price}
+                                </h3>
                                 <p>{product.longDesc}</p>
 
                                 {/* quantity */}
