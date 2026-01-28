@@ -3,23 +3,23 @@ import CartItem from "../components/CartItem";
 import OrderSummary from "../components/OrderSummary";
 import SignInFirstComponent from "../components/SignInFirstComponent";
 
+import { useAuth } from "../contexts/AuthContext";
+import { useCart } from "../contexts/CartContext";
+
 function Cart() {
-    const isLoggedIn = !!localStorage.getItem("token");
+    const { isLoggedIn } = useAuth();
+    const { allProducts, clearCart } = useCart();
 
     if (!isLoggedIn) {
         return <SignInFirstComponent name="Cart" />;
     }
 
-    const [allProducts, setAllProducts] = useState([]);
     const [error, setError] = useState("");
     const [subtotal, setSubtotal] = useState(0);
 
-    const url_getAllProductsInCart = "http://localhost:8080/cart/";
-    const url_clearCartItems = "http://localhost:8080/cart/";
-
-    useEffect(() => {
-        findAllProducts();
-    }, []);
+    // useEffect(() => {
+    //     findAllProducts();
+    // }, []);
 
     useEffect(() => {
         calcTotalCost();
@@ -50,50 +50,6 @@ function Cart() {
 
             const total = productTotals.reduce((sum, value) => sum + value, 0);
             setSubtotal(total);
-        } catch (error) {
-            setError(error);
-        }
-    };
-
-    const findAllProducts = async () => {
-        try {
-            const token = localStorage.getItem("token");
-
-            const response = await fetch(url_getAllProductsInCart, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(
-                    "failed to fetch all the cart items of this user",
-                );
-            }
-
-            const data = await response.json();
-
-            setAllProducts(data);
-        } catch (error) {
-            setError(error);
-        }
-    };
-
-    const clearCartItemsFunction = async () => {
-        const token = localStorage.getItem("token");
-
-        try {
-            const response = fetch(url_clearCartItems, {
-                method: "DELETE",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(response.status);
-            }
         } catch (error) {
             setError(error);
         }
@@ -148,7 +104,7 @@ function Cart() {
                         ) : (
                             // <OrderSummary subtotal={subtotal} />
                             <button
-                                onClick={clearCartItemsFunction}
+                                onClick={clearCart}
                                 className="w-full bg-black text-white py-2 rounded cursor-pointer"
                             >
                                 clear cart

@@ -4,51 +4,11 @@ import SignOutButton from "./SignOutButton";
 import { NavLink } from "react-router-dom";
 import.meta.env.VITE_API_BASE_URL;
 import { useAuth } from "../contexts/AuthContext";
+import { useCart } from "../contexts/CartContext";
 
 const Navbar = () => {
     const { isLoggedIn } = useAuth();
-    // TODO : totalCartQuantity should be updated everytime even without refresh
-    const [totalCartQuantity, setTotalCartQuantity] = useState(0);
-    const [error, setError] = useState("");
-
-    const url_getAllProductsInCart = "http://localhost:8080/cart/";
-
-    useEffect(() => {
-        if (isLoggedIn) {
-            findTotalCartQuantity();
-        } else {
-            setTotalCartQuantity(0);
-        }
-    }, [isLoggedIn]);
-
-    const findTotalCartQuantity = async () => {
-        try {
-            const token = localStorage.getItem("token");
-
-            const response = await fetch(url_getAllProductsInCart, {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-
-            if (!response.ok) {
-                throw new Error(
-                    "failed to fetch all the cart items of this user",
-                );
-            }
-
-            const data = await response.json();
-
-            const total = data.reduce((sum, item) => sum + item.quantity, 0);
-
-            setTotalCartQuantity(total);
-        } catch (error) {
-            setError(error);
-        }
-    };
-
-    // console.log(import.meta.env.VITE_API_BASE_URL);
+    const { cartCount } = useCart();
 
     return (
         <div className="border-b border-gray-200">
@@ -84,7 +44,7 @@ const Navbar = () => {
                                 <path d="M16 10a4 4 0 0 1-8 0"></path>
                             </svg>
                             <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-black text-white flex items-center justify-center text-[10px] font-medium">
-                                {totalCartQuantity}
+                                {cartCount}
                             </span>
                         </NavLink>
                     </div>
