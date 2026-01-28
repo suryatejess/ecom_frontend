@@ -1,15 +1,27 @@
 import React, { useState } from "react";
 import CheckoutButton from "./CheckoutButton";
 
+import { useAuth } from "../contexts/AuthContext";
+import { useCart } from "../contexts/CartContext";
+
 const OrderSummary = (props) => {
     const [address, setAddress] = useState("");
     const [receiverName, setReceiverName] = useState("");
     const [error, setError] = useState("");
 
+    const { isLoggedIn } = useAuth();
+    const { clearCart } = useCart();
+
     const backendUrl_placeorder = "http://localhost:8080/order/";
 
     const placeOrder = async () => {
         try {
+            if (!isLoggedIn) {
+                throw new Error(
+                    "you need to sign in before you can place an order",
+                );
+            }
+
             if (address === "") {
                 // alert("enter address");
                 throw new Error("please fill the address");
@@ -38,6 +50,8 @@ const OrderSummary = (props) => {
                 const message = await response.text();
                 throw new Error(message || "Failed to place order");
             }
+
+            await clearCart();
 
             alert("Order placed successfully!");
         } catch (err) {
