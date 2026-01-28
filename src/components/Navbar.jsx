@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Signin from "./Signin";
 import SignOutButton from "./SignOutButton";
+import { NavLink } from "react-router-dom";
 import.meta.env.VITE_API_BASE_URL;
 
 const Navbar = () => {
@@ -52,17 +53,19 @@ const Navbar = () => {
         <div className="border-b border-gray-200">
             <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* <div className="flex flex-row justify-between border-b-2 mb-2 p-2"> */}
-                <a href="/" className="text-sm font-semibold tracking-wide">
+                <NavLink to="/" className="text-sm font-semibold tracking-wide">
                     STORE
-                </a>
+                </NavLink>
 
                 <div className="flex gap-4">
                     {/* orders */}
-                    <a href="/order">Orders</a>
+                    <NavLink to="/order" className="flex gap-4">
+                        Orders
+                    </NavLink>
 
                     {/* cart */}
                     <div>
-                        <a className="relative" href="/cart">
+                        <NavLink to="/cart" className="relative">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -82,7 +85,7 @@ const Navbar = () => {
                             <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-black text-white flex items-center justify-center text-[10px] font-medium">
                                 {totalCartQuantity}
                             </span>
-                        </a>
+                        </NavLink>
                     </div>
 
                     {/* signin / signout button */}
