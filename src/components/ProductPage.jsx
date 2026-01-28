@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
+import { useCart } from "../contexts/CartContext";
+
 const ProductPage = (props) => {
     const { id } = useParams();
     const backendUrl = import.meta.env.VITE_API_BASE_URL;
@@ -10,6 +12,10 @@ const ProductPage = (props) => {
     const [validDecrementButton, setValidDecrementButton] = useState(false);
     const [validIncrementButton, setValidIncrementButton] = useState(true);
     const [error, setError] = useState("");
+
+    const { addToCart } = useCart();
+
+    const URL_CART = "http://localhost:8080/cart/";
 
     useEffect(() => {
         async function fetchProduct() {
@@ -29,6 +35,11 @@ const ProductPage = (props) => {
     if (error) return <p className="text-red-500">{error}</p>;
     if (!product) return <p className="p-8">Loading product...</p>;
 
+    const handleAddToCart = () => {
+        addToCart(id, quantity);
+        setQuantity(1);
+    };
+
     const decrementQuantity = () => {
         setQuantity((prev) => Math.max(prev - 1, 0));
     };
@@ -36,26 +47,6 @@ const ProductPage = (props) => {
     const incrementQuantity = (presentQuantity) => {
         setQuantity((prev) => Math.min(prev + 1, product.availableQuantity));
     };
-
-    async function addToCart() {
-        try {
-            const token = localStorage.getItem("token");
-
-            const response = await fetch("http://localhost:8080/cart/", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    productId: id,
-                    quantity: quantity,
-                }),
-            });
-        } catch (err) {
-            setError(err.message);
-        }
-    }
 
     return (
         <>
@@ -120,7 +111,7 @@ const ProductPage = (props) => {
 
                                 {/* TODO : I have to add the functionality of adding into a cart later i.e. add to cart */}
                                 <button
-                                    onClick={addToCart}
+                                    onClick={handleAddToCart}
                                     className="bg-black text-white rounded-md cursor-pointer"
                                 >
                                     Add to Cart

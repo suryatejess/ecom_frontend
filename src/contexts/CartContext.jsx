@@ -48,7 +48,7 @@ export const CartProvider = ({ children }) => {
 
     // this goes in AddToCartButton
     // think about how to send to "productId" prop to addToCart function when calling in other component i.e. wherever it is being used
-    async function addToCart(productId) {
+    async function addToCart(productId, quantity = 1) {
         try {
             if (!isLoggedIn) return;
 
@@ -62,7 +62,7 @@ export const CartProvider = ({ children }) => {
                 },
                 body: JSON.stringify({
                     productId: productId,
-                    quantity: 1,
+                    quantity: quantity,
                 }),
             });
 
