@@ -57,6 +57,10 @@ const Navbar = () => {
                 </a>
 
                 <div className="flex gap-4">
+                    {/* orders */}
+                    <a href="/order">Orders</a>
+
+                    {/* cart */}
                     <div>
                         <a className="relative" href="/cart">
                             <svg
@@ -80,6 +84,8 @@ const Navbar = () => {
                             </span>
                         </a>
                     </div>
+
+                    {/* signin / signout button */}
                     {isLoggedIn ? <SignOutButton /> : <Signin />}
                 </div>
                 {/* </div> */}
