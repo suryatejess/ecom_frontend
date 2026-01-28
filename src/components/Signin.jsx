@@ -1,9 +1,16 @@
 import React from "react";
 
+import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
+
 const Signin = () => {
+    const { login } = useAuth();
+
     return (
         <>
-            <a href="/auth">Sign in</a>
+            <Link to={"/auth"} className="bg-green-200">
+                Sign in
+            </Link>
         </>
     );
 };

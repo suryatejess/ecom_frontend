@@ -3,9 +3,10 @@ import Signin from "./Signin";
 import SignOutButton from "./SignOutButton";
 import { NavLink } from "react-router-dom";
 import.meta.env.VITE_API_BASE_URL;
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = () => {
-    const isLoggedIn = !!localStorage.getItem("token");
+    const { isLoggedIn } = useAuth();
     // TODO : totalCartQuantity should be updated everytime even without refresh
     const [totalCartQuantity, setTotalCartQuantity] = useState(0);
     const [error, setError] = useState("");

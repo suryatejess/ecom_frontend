@@ -1,15 +1,13 @@
 import React from "react";
 
-const SignOutButton = () => {
-    async function handleSubmit(e) {
-        e.preventDefault();
+import { useAuth } from "../contexts/AuthContext";
 
-        localStorage.removeItem("token");
-    }
+const SignOutButton = () => {
+    const { logout } = useAuth();
 
     return (
         <>
-            <button className="bg-blue-200" onClick={handleSubmit}>
+            <button className="bg-red-200" onClick={logout}>
                 Sign out
             </button>
         </>

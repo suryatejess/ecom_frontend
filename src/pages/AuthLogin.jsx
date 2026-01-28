@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 function AuthLogin() {
-    const isLoggedIn = !!localStorage.getItem("token");
+    const { isLoggedIn, login } = useAuth();
 
     if (isLoggedIn) {
         return <Navigate to="/" replace />;
@@ -14,13 +15,15 @@ function AuthLogin() {
 
     const navigate = useNavigate();
 
+    const url_backendSigin = "http://localhost:8080/auth/login";
+
     // console.log("first line");
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const response = await fetch("http://localhost:8080/auth/login", {
+            const response = await fetch(url_backendSigin, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -41,7 +44,7 @@ function AuthLogin() {
 
             console.log("jwt is done");
 
-            localStorage.setItem("token", jwt);
+            login(jwt);
 
             console.log("login successful", jwt);
 
