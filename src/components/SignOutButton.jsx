@@ -7,7 +7,7 @@ const SignOutButton = () => {
 
     return (
         <>
-            <button className="bg-red-200" onClick={logout}>
+            <button className="bg-red-200 cursor-pointer" onClick={logout}>
                 Sign out
             </button>
         </>

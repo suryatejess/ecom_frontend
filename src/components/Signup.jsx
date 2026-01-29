@@ -1,8 +1,18 @@
+import React from "react";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
-function AuthLogin() {
+/*
+    gotta deal with : 
+        username, 
+        password, 
+        name, 
+        email, 
+        address
+*/
+
+const Signup = () => {
     const { isLoggedIn, login } = useAuth();
 
     if (isLoggedIn) {
@@ -11,17 +21,21 @@ function AuthLogin() {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
 
-    const url_backendSigin = "http://localhost:8080/auth/login";
+    const url_backendSignup = "http://localhost:8080/auth/createUser";
 
     async function handleSubmit(e) {
         e.preventDefault();
 
         try {
-            const response = await fetch(url_backendSigin, {
+            const response = await fetch(url_backendSignup, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -29,8 +43,18 @@ function AuthLogin() {
                 body: JSON.stringify({
                     username,
                     password,
+                    name,
+                    email,
+                    address,
                 }),
             });
+
+            // handle username already exists
+            if (response.status === 409) {
+                throw new Error(
+                    "user with username " + username + " exists already ",
+                );
+            }
 
             if (response.status === 401) {
                 throw new Error("Incorrect username or password");
@@ -57,11 +81,12 @@ function AuthLogin() {
                     <h1 className="text-lg font-bold text-center">
                         Welcome back
                     </h1>
-                    <p className="font-light">
+                    <p className="font-light text-center">
                         Enter your credentials to access your account
                     </p>
                     <form className="mt-6" onSubmit={handleSubmit}>
                         <div>
+                            {/* username */}
                             <label htmlFor="uname">Username</label>
                             <br />
                             <input
@@ -77,6 +102,8 @@ function AuthLogin() {
                             />
                             <br />
                         </div>
+
+                        {/* password */}
                         <div className="mt-3">
                             <label className="mt-6" htmlFor="password">
                                 Password
@@ -87,20 +114,68 @@ function AuthLogin() {
                                 className="border-2 w-full"
                                 type="password"
                                 id="password"
-                                placeholder="password"
+                                placeholder="Password"
                                 name="password"
                             />
                             <br />
                         </div>
 
+                        {/* name */}
+                        <div className="mt-3">
+                            <label className="mt-6" htmlFor="text">
+                                Name
+                            </label>
+                            <br />
+                            <input
+                                onChange={(e) => setName(e.target.value)}
+                                className="border-2 w-full"
+                                type="text"
+                                id="fname"
+                                placeholder="John Doe"
+                                name="fname"
+                            />
+                        </div>
+
+                        {/* email */}
+                        <div className="mt-3">
+                            <label className="mt-6" htmlFor="text">
+                                Email
+                            </label>
+                            <br />
+                            <input
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="border-2 w-full"
+                                type="text"
+                                id="emailAddress"
+                                placeholder="johndoe@email.com"
+                                name="emailAddress"
+                            />
+                        </div>
+
+                        {/* address */}
+                        <div className="mt-3">
+                            <label className="mt-6" htmlFor="text">
+                                Address
+                            </label>
+                            <br />
+                            <input
+                                onChange={(e) => setAddress(e.target.value)}
+                                className="border-2 w-full"
+                                type="text"
+                                id="address"
+                                placeholder="Jane Street"
+                                name="address"
+                            />
+                        </div>
+
                         <input
                             className="bg-black text-white p-2 w-full mt-6 cursor-pointer"
                             type="submit"
-                            value={"Sign in"}
+                            value={"Sign Up"}
                         />
                     </form>
                     <hr className="border-amber-500 m-8" />
-                    Dont have an account? **modify this. add a link here to
+                    Have an account already? **modify this. add a link here to
                     signup**
                     {error && (
                         <p className="text-red-600 text-sm text-center">
@@ -111,6 +186,6 @@ function AuthLogin() {
             </div>
         </>
     );
-}
+};
 
-export default AuthLogin;
+export default Signup;
