@@ -67,7 +67,7 @@ const Signup = () => {
 
             // login(jwt);
 
-            navigate("/auth", { replace: true });
+            navigate("/", { replace: true });
         } catch (err) {
             setError(err.message);
         }
