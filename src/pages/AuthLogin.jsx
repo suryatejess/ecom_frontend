@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function AuthLogin() {
@@ -102,6 +102,15 @@ function AuthLogin() {
                     <hr className="border-amber-500 m-8" />
                     Dont have an account? **modify this. add a link here to
                     signup**
+                    <p className="text-sm text-center mt-4">
+                        Dont have an account?{" "}
+                        <Link
+                            to="/auth/signup"
+                            className="text-blue-600 hover:underline font-medium"
+                        >
+                            Sign up
+                        </Link>
+                    </p>
                     {error && (
                         <p className="text-red-600 text-sm text-center">
                             {error}

@@ -17,6 +17,8 @@ import TestComponent from "./pages/TestComponent";
 import Navbar from "./components/Navbar";
 import ProductPage from "./components/ProductPage";
 import RootLayout from "./layouts/RootLayout";
+import AuthLogin from "./pages/AuthLogin";
+import Signup from "./components/Signup";
 
 function App() {
     const [count, setCount] = useState(0);
@@ -25,7 +27,10 @@ function App() {
         createRoutesFromElements(
             <Route path="/" element={<RootLayout />}>
                 <Route index element={<Home />} />
-                <Route path="/auth" element={<Auth />} />
+                <Route path="/auth" element={<Auth />}>
+                    <Route path="login" element={<AuthLogin />} />
+                    <Route path="signup" element={<Signup />} />
+                </Route>
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/order" element={<Order />} />
                 <Route path="/test" element={<TestComponent />} />

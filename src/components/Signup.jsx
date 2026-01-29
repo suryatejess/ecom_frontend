@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 /*
@@ -174,8 +174,16 @@ const Signup = () => {
                         />
                     </form>
                     <hr className="border-amber-500 m-8" />
-                    Have an account already? **modify this. add a link here to
-                    signup**
+
+                    <p className="text-sm text-center mt-4">
+                        Have an account already?{" "}
+                        <Link
+                            to="/auth/login"
+                            className="text-blue-600 hover:underline font-medium"
+                        >
+                            Sign up
+                        </Link>
+                    </p>
                     {error && (
                         <p className="text-red-600 text-sm text-center">
                             {error}

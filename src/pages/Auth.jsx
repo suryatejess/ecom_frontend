@@ -1,10 +1,12 @@
+import { Outlet } from "react-router-dom";
 import AuthLogin from "./AuthLogin";
 
 function Auth() {
     return (
-        <>
-            <AuthLogin />
-        </>
+        <div>
+            {/* <AuthLogin /> */}
+            <Outlet />
+        </div>
     );
 }
 

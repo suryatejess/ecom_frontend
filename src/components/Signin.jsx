@@ -8,7 +8,7 @@ const Signin = () => {
 
     return (
         <>
-            <Link to={"/auth"} className="bg-green-200">
+            <Link to={"/auth/login"} className="bg-green-200">
                 Sign in
             </Link>
         </>
