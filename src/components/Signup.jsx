@@ -49,7 +49,6 @@ const Signup = () => {
                 }),
             });
 
-            // handle username already exists
             if (response.status === 409) {
                 throw new Error(
                     "user with username " + username + " exists already ",
@@ -66,9 +65,9 @@ const Signup = () => {
 
             const jwt = await response.text();
 
-            login(jwt);
+            // login(jwt);
 
-            navigate("/", { replace: true });
+            navigate("/auth", { replace: true });
         } catch (err) {
             setError(err.message);
         }
