@@ -37,9 +37,6 @@ function Order() {
             const result = await response.json();
 
             setAllOrders(result);
-
-            // TODO : Remove console.log later
-            console.log(result);
         } catch (error) {
             setError(error);
         }

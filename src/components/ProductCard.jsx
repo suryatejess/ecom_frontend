@@ -16,7 +16,10 @@ const ProductCard = (props) => {
                         className="block w-full h-full"
                     >
                         <img
-                            src={props.image}
+                            src={
+                                props.image ||
+                                "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+                            }
                             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                             alt=""
                         />

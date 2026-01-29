@@ -3,7 +3,6 @@ import ProductCard from "./ProductCard";
 import.meta.env.VITE_API_BASE_URL;
 
 const ProductsTogether = () => {
-    console.log("bakendUrl is " + import.meta.env.VITE_API_BASE_URL);
     const backendUrl = import.meta.env.VITE_API_BASE_URL;
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 
 const CartItem = (props) => {
-    // const [totalQuantityInInventory, setTotalQuantityInInventory] = useState("");
     const backendUrl = import.meta.env.VITE_API_BASE_URL;
     const [product, setProduct] = useState(null);
     const [error, setError] = useState("");
 
-    const [productImage, setProductImage] = useState("");
+    // placeholder image initially
+    const [productImage, setProductImage] = useState(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIoTqFvPu3IOd_DzmzYwpB_GmNYcbcd02WsQ&s",
+    );
     const [productQuantity, setProductQuantity] = useState(
         props.productQuantity,
     );
@@ -22,9 +24,12 @@ const CartItem = (props) => {
             const res = await fetch(`${backendUrl}/product/${props.productId}`);
             if (!res.ok) throw new Error("Failed to fetch product");
             const data = await res.json();
+
             setProduct(data);
 
-            setProductImage(data.image);
+            if (data.image) {
+                setProductImage(data.image);
+            }
             setProductName(data.name);
             setProductPrice(data.price);
         } catch (err) {
@@ -33,9 +38,6 @@ const CartItem = (props) => {
     }
 
     async function updateQuantityBasedOnProductId(newQuantity) {
-        console.log("newQuantity : " + newQuantity);
-        console.log("pops.productId : " + props.productId);
-
         try {
             const token = localStorage.getItem("token");
 

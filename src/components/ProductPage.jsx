@@ -76,7 +76,10 @@ const ProductPage = (props) => {
                     <div className="grid grid-rows-2 sm:grid-cols-2 mt-4">
                         {/* image  */}
                         <img
-                            src={product.image}
+                            src={
+                                product.image ||
+                                "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png"
+                            }
                             alt="here the image of the product is supposed to be there"
                         />
 
@@ -109,7 +112,6 @@ const ProductPage = (props) => {
                                     </button>
                                 </div>
 
-                                {/* TODO : I have to add the functionality of adding into a cart later i.e. add to cart */}
                                 <button
                                     onClick={handleAddToCart}
                                     className="bg-black text-white rounded-md cursor-pointer"

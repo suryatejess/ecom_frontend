@@ -17,8 +17,6 @@ function AuthLogin() {
 
     const url_backendSigin = "http://localhost:8080/auth/login";
 
-    // console.log("first line");
-
     async function handleSubmit(e) {
         e.preventDefault();
 
@@ -34,19 +32,17 @@ function AuthLogin() {
                 }),
             });
 
-            if (!response.ok) {
-                throw new Error(await response.text);
+            if (response.status === 401) {
+                throw new Error("Incorrect username or password");
             }
 
-            console.log("before jwt");
+            if (!response.ok) {
+                throw new Error(await response.text());
+            }
 
             const jwt = await response.text();
 
-            console.log("jwt is done");
-
             login(jwt);
-
-            console.log("login successful", jwt);
 
             navigate("/", { replace: true });
         } catch (err) {
@@ -70,7 +66,10 @@ function AuthLogin() {
                             <label htmlFor="uname">Username</label>
                             <br />
                             <input
-                                onChange={(e) => setUsername(e.target.value)}
+                                onChange={(e) => {
+                                    setUsername(e.target.value);
+                                    setError("");
+                                }}
                                 className="border-2 w-full"
                                 type="text"
                                 id="uname"
@@ -87,7 +86,7 @@ function AuthLogin() {
                             <input
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="border-2 w-full"
-                                type="text"
+                                type="password"
                                 id="password"
                                 placeholder="password"
                                 name="password"
@@ -96,11 +95,17 @@ function AuthLogin() {
                         </div>
 
                         <input
-                            className="bg-black text-white p-2 w-full mt-6"
+                            className="bg-black text-white p-2 w-full mt-6 cursor-pointer"
                             type="submit"
                             value={"Sign in"}
                         />
                     </form>
+
+                    {error && (
+                        <p className="text-red-600 text-sm text-center">
+                            {error}
+                        </p>
+                    )}
                 </div>
             </div>
         </>

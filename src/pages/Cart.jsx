@@ -17,10 +17,6 @@ function Cart() {
     const [error, setError] = useState("");
     const [subtotal, setSubtotal] = useState(0);
 
-    // useEffect(() => {
-    //     findAllProducts();
-    // }, []);
-
     useEffect(() => {
         calcTotalCost();
     }, [allProducts]);
@@ -57,7 +53,6 @@ function Cart() {
 
     return (
         <>
-            {/* <div className="grid lg:grid-cols-3 gap-12"> */}
             <div className="max-w-7xl mx-auto px-6">
                 {/* continue shopping and Cart heading*/}
                 <div className="mb-8">
@@ -113,7 +108,6 @@ function Cart() {
                     </div>
                 </div>
             </div>
-            {/* </div> */}
         </>
     );
 }

@@ -27,9 +27,6 @@ const OrderItemProduct = (props) => {
                 const result = await response.json();
 
                 setProductImage(result.image);
-
-                console.log("printing delASAP result");
-                console.log(result.image);
             } catch (error) {
                 setError(error);
             }
