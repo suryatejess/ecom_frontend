@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import { useCart } from "../contexts/CartContext";
+import { useAuth } from "../contexts/AuthContext";
 
 const ProductPage = (props) => {
     const { id } = useParams();
@@ -14,6 +15,7 @@ const ProductPage = (props) => {
     const [error, setError] = useState("");
 
     const { addToCart } = useCart();
+    const { isLoggedIn } = useAuth();
 
     const URL_CART = "http://localhost:8080/cart/";
 
@@ -132,11 +134,26 @@ const ProductPage = (props) => {
                                         </div>
                                     </div>
 
-                                    <button
+                                    {/* <button
                                         onClick={handleAddToCart}
                                         className="bg-black text-white rounded-md py-3 text-sm font-medium mt-4 hover:opacity-90 transition cursor-pointer"
                                     >
                                         Add to Cart
+                                    </button> */}
+                                    <button
+                                        onClick={handleAddToCart}
+                                        disabled={!isLoggedIn}
+                                        className={`rounded-md py-3 text-sm font-medium mt-4 transition
+        ${
+            isLoggedIn
+                ? "bg-black text-white hover:opacity-90 cursor-pointer"
+                : "bg-gray-300 text-gray-500 cursor-not-allowed"
+        }
+    `}
+                                    >
+                                        {isLoggedIn
+                                            ? "Add to Cart"
+                                            : "Login to add to cart"}
                                     </button>
 
                                     <div className="border-t-2 pt-4 mt-6">
