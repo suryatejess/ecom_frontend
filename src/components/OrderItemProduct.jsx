@@ -26,7 +26,10 @@ const OrderItemProduct = (props) => {
 
                 const result = await response.json();
 
-                setProductImage(result.image);
+                setProductImage(
+                    result.image ||
+                        "https://img.freepik.com/free-vector/illustration-gallery-icon_53876-27002.jpg",
+                );
             } catch (error) {
                 setError(error);
             }
