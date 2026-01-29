@@ -50,79 +50,100 @@ const ProductPage = (props) => {
 
     return (
         <>
-            <div className="flex flex-col">
-                <div className="flex flex-col">
-                    {/* <- back to products */}
-                    <a href="/" className="inline-flex items-center text-sm">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeinejoin="round"
-                            strokeLinejoin="round"
-                            className="lucide lucide-arrow-left h-4 w-4"
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="flex flex-col ">
+                    <div className="flex flex-col ">
+                        {/* <- back to products */}
+                        <a
+                            href="/"
+                            className="inline-flex items-center text-sm pt-6"
                         >
-                            <path d="m12 19-7-7 7-7"></path>
-                            <path d="M19 12H5"></path>
-                        </svg>
-                        Back to products
-                    </a>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeinejoin="round"
+                                strokeLinejoin="round"
+                                className="lucide lucide-arrow-left h-4 w-4"
+                            >
+                                <path d="m12 19-7-7 7-7"></path>
+                                <path d="M19 12H5"></path>
+                            </svg>
+                            Back to products
+                        </a>
 
-                    {/* down */}
-                    <div className="grid grid-rows-2 sm:grid-cols-2 mt-4">
-                        {/* image  */}
-                        <img
-                            src={
-                                product.image ||
-                                "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png"
-                            }
-                            alt="here the image of the product is supposed to be there"
-                        />
+                        {/* down */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-start">
+                            {/* image  */}
+                            <div className="bg-gray-100 rounded-xl p-6 flex items-center justify-center">
+                                <img
+                                    src={
+                                        product.image ||
+                                        "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png"
+                                    }
+                                    alt={product.name}
+                                    className="object-contain max-h-[420px] w-full"
+                                />
+                            </div>
 
-                        {/* right */}
-                        <div>
-                            <div className="flex flex-col">
-                                <h1>{product.name}</h1>
-                                <h3>
-                                    <span>₹</span>
-                                    {product.price}
-                                </h3>
-                                <p>{product.longDesc}</p>
+                            {/* right */}
+                            <div>
+                                <div className="flex flex-col">
+                                    <h1 className="text-3xl font-semibold mb-2">
+                                        {product.name}
+                                    </h1>
 
-                                {/* quantity */}
-                                <div>
-                                    <p>Quantity</p>
-
-                                    <button
-                                        className="text-white bg-black px-2 m-1 cursor-pointer"
-                                        onClick={decrementQuantity}
-                                    >
-                                        -
-                                    </button>
-                                    <span>{quantity}</span>
-                                    <button
-                                        className="text-white px-2 m-1 bg-black cursor-pointer"
-                                        onClick={incrementQuantity}
-                                    >
-                                        +
-                                    </button>
-                                </div>
-
-                                <button
-                                    onClick={handleAddToCart}
-                                    className="bg-black text-white rounded-md cursor-pointer"
-                                >
-                                    Add to Cart
-                                </button>
-
-                                <div className="border-t-2 pt-6 mt-6">
-                                    <p className="text-green-600 text-sm">
-                                        {product.availableQuantity} in stock
+                                    <p className="text-xl font-medium mb-4">
+                                        ₹{product.price}
                                     </p>
+
+                                    <p className="text-gray-600 leading-relaxed mb-6">
+                                        {product.longDesc}
+                                    </p>
+
+                                    {/* quantity */}
+                                    <div className="mb-6">
+                                        <p className="text-sm font-medium mb-2">
+                                            Quantity
+                                        </p>
+
+                                        <div className="inline-flex items-center border rounded-md">
+                                            <button
+                                                onClick={decrementQuantity}
+                                                className="px-3 py-1 text-lg hover:bg-gray-100 transition cursor-pointer"
+                                            >
+                                                −
+                                            </button>
+
+                                            <span className="px-4 text-sm">
+                                                {quantity}
+                                            </span>
+
+                                            <button
+                                                onClick={incrementQuantity}
+                                                className="px-3 py-1 text-lg hover:bg-gray-100 transition cursor-pointer"
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={handleAddToCart}
+                                        className="bg-black text-white rounded-md py-3 text-sm font-medium mt-4 hover:opacity-90 transition cursor-pointer"
+                                    >
+                                        Add to Cart
+                                    </button>
+
+                                    <div className="border-t-2 pt-4 mt-6">
+                                        <p className="text-green-600 text-sm">
+                                            {product.availableQuantity} in stock
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
