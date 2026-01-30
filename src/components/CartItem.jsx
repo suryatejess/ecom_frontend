@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const CartItem = (props) => {
     const backendUrl = import.meta.env.VITE_API_BASE_URL;
@@ -92,13 +93,15 @@ const CartItem = (props) => {
         <>
             <div className="flex gap-4 py-6 border-b border-gray-200">
                 {/* image */}
-                <div className="h-24 w-24 overflow-hidden rounded-xl bg-gray-100">
-                    <img
-                        className="h-full w-full object-cover"
-                        src={productImage}
-                        alt="image of the proudct"
-                    />
-                </div>
+                <Link to={"/product/" + props.productId}>
+                    <div className="h-24 w-24 overflow-hidden rounded-xl bg-gray-100">
+                        <img
+                            className="h-full w-full object-cover"
+                            src={productImage}
+                            alt="image of the proudct"
+                        />
+                    </div>
+                </Link>
 
                 {/* details */}
                 <div className="flex flex-1 flex-col">
