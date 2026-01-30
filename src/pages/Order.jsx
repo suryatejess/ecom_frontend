@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 
 import OrderItemProduct from "../components/OrderItemProduct";
+import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 function Order() {
     const [error, setError] = useState();
     const [allOrders, setAllOrders] = useState([]);
     const [selected, setSelected] = useState(null);
+
+    const { isLoggedIn } = useAuth();
 
     const toggle = (i) => {
         if (selected == i) {
@@ -27,6 +31,10 @@ function Order() {
         const token = localStorage.getItem("token");
 
         try {
+            if (!isLoggedIn) {
+                throw new Error("you need to sign in first");
+            }
+
             const response = await fetch(url_getAllOrders, {
                 headers: {
                     "Content-Type": "application/json",
@@ -64,12 +72,12 @@ function Order() {
             <div className="max-w-7xl mx-auto px-6">
                 {/* continue shopping */}
                 <div className="mb-8">
-                    <a
-                        href="/"
+                    <Link
+                        to={"/"}
                         className="text-sm text-gray-500 hover:text-gray-900 flex items-center gap-2 mt-5"
                     >
                         ← Continue shopping
-                    </a>
+                    </Link>
 
                     <h1 className="mt-4 text-2xl font-semibold">Orders</h1>
 

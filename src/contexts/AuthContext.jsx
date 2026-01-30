@@ -3,6 +3,10 @@ import { useContext, createContext, useState } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+    const [appUsername, setAppUsername] = useState(
+        localStorage.getItem("app_username"),
+    );
+
     const [isLoggedIn, setIsLoggedIn] = useState(
         !!localStorage.getItem("token"),
     );
@@ -17,12 +21,19 @@ export const AuthProvider = ({ children }) => {
         setIsLoggedIn(false);
     };
 
+    const fetchUsername = (username) => {
+        localStorage.setItem("app_username", username);
+        setAppUsername(username);
+    };
+
     return (
         <AuthContext.Provider
             value={{
                 isLoggedIn,
                 login,
                 logout,
+                appUsername,
+                fetchUsername,
             }}
         >
             {children}

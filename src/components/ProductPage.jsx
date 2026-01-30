@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 
 import { useCart } from "../contexts/CartContext";
@@ -10,8 +10,6 @@ const ProductPage = (props) => {
 
     const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState(null);
-    const [validDecrementButton, setValidDecrementButton] = useState(false);
-    const [validIncrementButton, setValidIncrementButton] = useState(true);
     const [error, setError] = useState("");
 
     const { addToCart } = useCart();
@@ -56,8 +54,8 @@ const ProductPage = (props) => {
                 <div className="flex flex-col ">
                     <div className="flex flex-col ">
                         {/* <- back to products */}
-                        <a
-                            href="/"
+                        <Link
+                            to="/"
                             className="inline-flex items-center text-sm pt-6"
                         >
                             <svg
@@ -76,7 +74,7 @@ const ProductPage = (props) => {
                                 <path d="M19 12H5"></path>
                             </svg>
                             Back to products
-                        </a>
+                        </Link>
 
                         {/* down */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-start">

@@ -3,7 +3,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 function AuthLogin() {
-    const { isLoggedIn, login } = useAuth();
+    const { isLoggedIn, login, fetchUsername } = useAuth();
 
     if (isLoggedIn) {
         return <Navigate to="/" replace />;
@@ -43,6 +43,7 @@ function AuthLogin() {
             const jwt = await response.text();
 
             login(jwt);
+            fetchUsername(username);
 
             navigate("/", { replace: true });
         } catch (err) {

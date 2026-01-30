@@ -5,6 +5,7 @@ import SignInFirstComponent from "../components/SignInFirstComponent";
 
 import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
+import { Link } from "react-router-dom";
 
 function Cart() {
     const { isLoggedIn } = useAuth();
@@ -56,12 +57,12 @@ function Cart() {
             <div className="max-w-7xl mx-auto px-6">
                 {/* continue shopping and Cart heading*/}
                 <div className="mb-8">
-                    <a
-                        href="/"
+                    <Link
+                        to="/"
                         className="text-sm text-gray-500 hover:text-gray-900 flex items-center gap-2 mt-5"
                     >
                         ← Continue shopping
-                    </a>
+                    </Link>
 
                     <h1 className="mt-4 text-2xl font-semibold">Cart</h1>
                 </div>

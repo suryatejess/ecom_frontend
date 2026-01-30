@@ -13,7 +13,7 @@ import { useAuth } from "../contexts/AuthContext";
 */
 
 const Signup = () => {
-    const { isLoggedIn, login } = useAuth();
+    const { isLoggedIn } = useAuth();
 
     if (isLoggedIn) {
         return <Navigate to="/" replace />;
@@ -64,8 +64,6 @@ const Signup = () => {
             }
 
             const jwt = await response.text();
-
-            // login(jwt);
 
             navigate("/", { replace: true });
         } catch (err) {

@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useCart } from "../contexts/CartContext";
 
 const Navbar = () => {
-    const { isLoggedIn } = useAuth();
+    const { isLoggedIn, appUsername } = useAuth();
     const { cartCount } = useCart();
 
     return (
@@ -19,6 +19,12 @@ const Navbar = () => {
                 </NavLink>
 
                 <div className="flex gap-4">
+                    {isLoggedIn && (
+                        <p className="text-shadow-black">
+                            signed in as <span>{appUsername}</span>
+                        </p>
+                    )}
+
                     {/* orders */}
                     <NavLink to="/order" className="flex gap-4">
                         Orders

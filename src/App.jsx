@@ -21,8 +21,6 @@ import AuthLogin from "./pages/AuthLogin";
 import Signup from "./components/Signup";
 
 function App() {
-    const [count, setCount] = useState(0);
-
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<RootLayout />}>
