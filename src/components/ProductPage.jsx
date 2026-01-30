@@ -144,12 +144,12 @@ const ProductPage = (props) => {
                                         onClick={handleAddToCart}
                                         disabled={!isLoggedIn}
                                         className={`rounded-md py-3 text-sm font-medium mt-4 transition
-        ${
-            isLoggedIn
-                ? "bg-black text-white hover:opacity-90 cursor-pointer"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-        }
-    `}
+                                            ${
+                                                isLoggedIn
+                                                    ? "bg-black text-white hover:opacity-90 cursor-pointer"
+                                                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                            }
+                                        `}
                                     >
                                         {isLoggedIn
                                             ? "Add to Cart"

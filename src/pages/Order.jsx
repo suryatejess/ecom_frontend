@@ -15,6 +15,12 @@ function Order() {
         setSelected(i);
     };
 
+    const statusStyles = {
+        PROCESSING: "bg-yellow-100 text-yellow-700",
+        SHIPPED: "bg-purple-100 text-purple-700",
+        DELIVERED: "bg-green-100 text-green-700",
+    };
+
     const url_getAllOrders = "http://localhost:8080/order/";
 
     const getAllOrders = async () => {
@@ -42,6 +48,13 @@ function Order() {
         }
     };
 
+    const getOrderTotal = (items) => {
+        return items.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0,
+        );
+    };
+
     useEffect(() => {
         getAllOrders();
     }, []);
@@ -64,12 +77,14 @@ function Order() {
                         {allOrders.map((order, i) => (
                             <div
                                 key={order.id}
-                                className="border rounded p-4 cursor-pointer"
+                                // className="border rounded p-4 cursor-pointer"
+                                className="border border-gray-200 rounded-lg p-6 cursor-pointer bg-white mb-4"
                                 onClick={() => toggle(i)}
                             >
-                                <div className="flex flex-row justify-between">
+                                {/* <div className="flex flex-row justify-between"> */}
+                                <div className="flex items-start justify-between">
                                     <div>
-                                        <h2 className="font-semibold mb-4">
+                                        <h2 className="text-sm font-semibold text-gray-900">
                                             Order #{order.id}
                                         </h2>
 
@@ -81,10 +96,20 @@ function Order() {
                                             }
                                         </h3>
                                     </div>
-                                    <div className="flex flex-row gap-4">
-                                        <span>{order.orderStatus}</span>
+                                    <div className="flex items-center gap-4">
+                                        <span
+                                            className={`px-2 py-1 text-xs rounded-full ${
+                                                statusStyles[order.orderStatus]
+                                            }`}
+                                        >
+                                            {order.orderStatus}
+                                        </span>
 
-                                        <span>
+                                        <span className="font-semibold">
+                                            Total: ₹{getOrderTotal(order.items)}
+                                        </span>
+
+                                        <span className="text-gray-500 text-lg">
                                             {/* TODO : replace '+', and '-' with an svg image */}
 
                                             {selected === i ? "-" : "+"}
@@ -97,7 +122,8 @@ function Order() {
                                 {/* this would be visually visible only when card is expanded */}
 
                                 {selected === i ? (
-                                    <div className="mt-4 space-y-3">
+                                    // <div className="mt-4 space-y-3">
+                                    <div className="mt-6 space-y-4 border-t pt-4">
                                         {order.items.map((item) => (
                                             <OrderItemProduct
                                                 key={item.productId}

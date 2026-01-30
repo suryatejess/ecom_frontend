@@ -40,27 +40,27 @@ const OrderItemProduct = (props) => {
 
     return (
         <>
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="flex flex-row border-2">
-                    {/* image */}
-                    <div className="flex items-center">
-                        <img
-                            src={productImage}
-                            alt="image of the product"
-                            className="h-16 w-16"
-                        />
-                    </div>
+            {/* <div className="max-w-7xl mx-auto px-6"> */}
 
-                    {/* title, quantity, price */}
-                    <div className="flex flex-col">
-                        {/* title */}
-                        <div>{props.title}</div>
+            <div className="flex flex-row">
+                {/* image */}
+                <div className="flex items-center gap-4 mr-2">
+                    <img
+                        src={productImage}
+                        alt="image of the product"
+                        className="h-14 w-14 rounded-md object-cover"
+                    />
+                </div>
 
-                        {/* qty and price */}
-                        <div>
-                            Qty: {props.quantity} x <span>₹</span>
-                            {props.price} = {props.quantity}
-                        </div>
+                {/* title, quantity, price */}
+                <div className="flex flex-col">
+                    {/* title */}
+                    <div>{props.title}</div>
+
+                    {/* qty and price */}
+                    <div>
+                        Qty: {props.quantity} x <span>₹</span>
+                        {props.price} = {props.quantity * props.price}
                     </div>
                 </div>
             </div>

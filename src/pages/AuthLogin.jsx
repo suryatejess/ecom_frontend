@@ -100,8 +100,6 @@ function AuthLogin() {
                         />
                     </form>
                     <hr className="border-amber-500 m-8" />
-                    Dont have an account? **modify this. add a link here to
-                    signup**
                     <p className="text-sm text-center mt-4">
                         Dont have an account?{" "}
                         <Link
