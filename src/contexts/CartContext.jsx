@@ -98,6 +98,29 @@ export const CartProvider = ({ children }) => {
         }
     };
 
+    const updateCartItem = async (productId, quantity) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const response = await fetch(CART_URL, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ productId, quantity }),
+            });
+
+            if (!response.ok) {
+                throw new Error("failed to update cart");
+            }
+
+            await fetchCart();
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
     return (
         <CartContext.Provider
             value={{
@@ -112,6 +135,7 @@ export const CartProvider = ({ children }) => {
                 addToCart,
                 // helps in the Cart.jsx clear cart
                 clearCart,
+                updateCartItem,
             }}
         >
             {children}

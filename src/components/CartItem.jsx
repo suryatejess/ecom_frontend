@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useCart } from "../contexts/CartContext";
+
 const CartItem = (props) => {
     const backendUrl = import.meta.env.VITE_API_BASE_URL;
     const [product, setProduct] = useState(null);
     const [error, setError] = useState("");
+
+    const { updateCartItem } = useCart();
 
     // placeholder image initially
     const [productImage, setProductImage] = useState(
@@ -62,8 +66,8 @@ const CartItem = (props) => {
         const newQuantity = Math.max(productQuantity - 1, 0);
 
         setProductQuantity(newQuantity);
-
-        updateQuantityBasedOnProductId(newQuantity);
+        updateCartItem(props.productId, newQuantity);
+        // updateQuantityBasedOnProductId(newQuantity);
     };
 
     const incrementQuantity = () => {
@@ -75,7 +79,8 @@ const CartItem = (props) => {
         );
 
         setProductQuantity(newQuantity);
-        updateQuantityBasedOnProductId(newQuantity);
+        updateCartItem(props.productId, newQuantity);
+        // updateQuantityBasedOnProductId(newQuantity);
     };
 
     const clearCartAfterHittingCrossButton = async () => {
@@ -144,7 +149,7 @@ const CartItem = (props) => {
                     <div className="mt-4 flex items-center gap-3">
                         <button
                             onClick={decrementQuantity}
-                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8"
+                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 cursor-pointer"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -166,7 +171,7 @@ const CartItem = (props) => {
 
                         <button
                             onClick={incrementQuantity}
-                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8"
+                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 w-8 cursor-pointer"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
