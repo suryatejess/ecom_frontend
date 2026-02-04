@@ -26,11 +26,14 @@ function AuthLogin() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({
                     username,
                     password,
                 }),
             });
+
+            console.log("deez nuts in the AuthLogin:handleSubmit"); // TODO : remove this line later
 
             if (response.status === 401) {
                 throw new Error("Incorrect username or password");
@@ -40,9 +43,6 @@ function AuthLogin() {
                 throw new Error(await response.text());
             }
 
-            const jwt = await response.text();
-
-            login(jwt);
             fetchUsername(username);
 
             navigate("/", { replace: true });

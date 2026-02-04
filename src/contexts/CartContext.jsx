@@ -33,6 +33,7 @@ export const CartProvider = ({ children }) => {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
+                credentials: "include",
             });
 
             if (!response.ok) {
@@ -60,6 +61,7 @@ export const CartProvider = ({ children }) => {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
+                credentials: "include",
                 body: JSON.stringify({
                     productId: productId,
                     quantity: quantity,
@@ -83,6 +85,7 @@ export const CartProvider = ({ children }) => {
         try {
             const response = await fetch(CART_URL, {
                 method: "DELETE",
+                credentials: "include",
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -104,6 +107,7 @@ export const CartProvider = ({ children }) => {
 
             const response = await fetch(CART_URL, {
                 method: "PUT",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
