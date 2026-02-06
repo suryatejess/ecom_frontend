@@ -65,7 +65,6 @@ const CartItem = (props) => {
 
         setProductQuantity(newQuantity);
         updateCartItem(props.productId, newQuantity);
-        // updateQuantityBasedOnProductId(newQuantity);
     };
 
     const incrementQuantity = () => {
@@ -78,15 +77,13 @@ const CartItem = (props) => {
 
         setProductQuantity(newQuantity);
         updateCartItem(props.productId, newQuantity);
-        // updateQuantityBasedOnProductId(newQuantity);
     };
 
     const clearCartAfterHittingCrossButton = async () => {
-        const res = await fetch(`${backendUrl}/cart/${props.productId}`, {
-            method: "DELETE",
-            credentials: "include",
-            headers: {},
-        });
+        if (!product) return;
+
+        setProductQuantity(0);
+        updateCartItem(props.productId, 0);
     };
 
     return (
@@ -119,7 +116,7 @@ const CartItem = (props) => {
 
                         <button
                             onClick={clearCartAfterHittingCrossButton}
-                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 w-8"
+                            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-8 w-8 cursor-pointer"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
