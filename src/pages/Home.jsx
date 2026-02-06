@@ -2,8 +2,6 @@ import ProductsTogether from "../components/ProductsTogether";
 import SignOutButton from "../components/SignOutButton";
 
 function Home() {
-    // const isLoggedIn = !!localStorage.getItem("token");
-
     return (
         <>
             {/* <div> */}

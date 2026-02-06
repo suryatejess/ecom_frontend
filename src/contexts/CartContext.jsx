@@ -27,12 +27,8 @@ export const CartProvider = ({ children }) => {
         if (!isLoggedIn) return;
 
         try {
-            const token = localStorage.getItem("token");
-
             const response = await fetch(CART_URL, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: {},
                 credentials: "include",
             });
 
@@ -53,15 +49,12 @@ export const CartProvider = ({ children }) => {
         try {
             if (!isLoggedIn) return;
 
-            const token = localStorage.getItem("token");
-
             const response = await fetch(CART_URL, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
-                credentials: "include",
                 body: JSON.stringify({
                     productId: productId,
                     quantity: quantity,
@@ -80,15 +73,11 @@ export const CartProvider = ({ children }) => {
 
     // this goes in Cart
     const clearCart = async () => {
-        const token = localStorage.getItem("token");
-
         try {
             const response = await fetch(CART_URL, {
                 method: "DELETE",
                 credentials: "include",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: {},
             });
 
             if (!response.ok) {
@@ -103,14 +92,11 @@ export const CartProvider = ({ children }) => {
 
     const updateCartItem = async (productId, quantity) => {
         try {
-            const token = localStorage.getItem("token");
-
             const response = await fetch(CART_URL, {
                 method: "PUT",
                 credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({ productId, quantity }),
             });

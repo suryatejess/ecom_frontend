@@ -16,8 +16,6 @@ export const AuthProvider = ({ children }) => {
                 credentials: "include",
             });
 
-            console.log("deez nuts after  AutheContext:checkIfLoggedIn");
-
             if (!response.ok) {
                 setIsLoggedIn(false);
                 setAppUsername(null);
@@ -27,11 +25,6 @@ export const AuthProvider = ({ children }) => {
             const data = await response.json();
             setIsLoggedIn(true);
             setAppUsername(data.username);
-
-            console.log("deez nuts begin :: " + isLoggedIn);
-            console.log("isLoggedIn :: " + isLoggedIn);
-            console.log("appUsername :: " + appUsername);
-            console.log("deez nuts end :: " + isLoggedIn);
         } catch (error) {
             setError(error.message);
         }
@@ -44,7 +37,6 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const login = (token) => {
-        console.log("deez nuts begin");
         checkIfLoggedIn();
         setIsLoggedIn(true);
     };
@@ -56,7 +48,6 @@ export const AuthProvider = ({ children }) => {
     };
 
     const fetchUsername = (username) => {
-        console.log("deez nuts in fetchUsername");
         checkIfLoggedIn();
     };
 

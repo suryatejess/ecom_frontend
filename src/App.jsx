@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import {
     createBrowserRouter,
@@ -14,7 +11,6 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import TestComponent from "./pages/TestComponent";
-import Navbar from "./components/Navbar";
 import ProductPage from "./components/ProductPage";
 import RootLayout from "./layouts/RootLayout";
 import AuthLogin from "./pages/AuthLogin";

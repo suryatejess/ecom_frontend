@@ -32,13 +32,11 @@ const OrderSummary = (props) => {
                 throw new Error("please fill the receiverName");
             }
 
-            const token = localStorage.getItem("token");
-
             const response = await fetch(backendUrl_placeorder, {
                 method: "POST",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     address,

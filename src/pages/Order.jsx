@@ -28,8 +28,6 @@ function Order() {
     const url_getAllOrders = "http://localhost:8080/order/";
 
     const getAllOrders = async () => {
-        const token = localStorage.getItem("token");
-
         try {
             if (!isLoggedIn) {
                 throw new Error("you need to sign in first");
@@ -38,8 +36,8 @@ function Order() {
             const response = await fetch(url_getAllOrders, {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
+                credentials: "include",
             });
 
             if (!response.ok) {

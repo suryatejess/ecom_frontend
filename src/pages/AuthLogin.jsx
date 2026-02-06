@@ -33,8 +33,6 @@ function AuthLogin() {
                 }),
             });
 
-            console.log("deez nuts in the AuthLogin:handleSubmit"); // TODO : remove this line later
-
             if (response.status === 401) {
                 throw new Error("Incorrect username or password");
             }
@@ -115,6 +113,13 @@ function AuthLogin() {
                             {error}
                         </p>
                     )}
+
+                    {/* TODO : modify the ui later */}
+                    <a href="http://localhost:8080/oauth2/authorization/google">
+                        Login with Google
+                    </a>
+
+                    {/* end of the new lines of a href code */}
                 </div>
             </div>
         </>

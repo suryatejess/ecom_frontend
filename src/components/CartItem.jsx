@@ -44,13 +44,11 @@ const CartItem = (props) => {
 
     async function updateQuantityBasedOnProductId(newQuantity) {
         try {
-            const token = localStorage.getItem("token");
-
             const response = await fetch(`${backendUrl}/cart/`, {
                 method: "PUT",
+                credentials: "include",
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     productId: props.productId,
@@ -84,13 +82,10 @@ const CartItem = (props) => {
     };
 
     const clearCartAfterHittingCrossButton = async () => {
-        const token = localStorage.getItem("token");
-
         const res = await fetch(`${backendUrl}/cart/${props.productId}`, {
             method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
+            credentials: "include",
+            headers: {},
         });
     };
 
