@@ -18,13 +18,13 @@ export const AuthProvider = ({ children }) => {
 
             if (!response.ok) {
                 setIsLoggedIn(false);
-                setAppUsername(null);
+                setAppName(null);
                 return;
             }
 
             const data = await response.json();
             setIsLoggedIn(true);
-            setAppUsername(data.username);
+            setAppName(data.name);
         } catch (error) {
             setError(error.message);
         }
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
 
     const [error, setError] = useState("");
 
-    const [appUsername, setAppUsername] = useState("anony");
+    const [appName, setAppName] = useState("anony");
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -57,7 +57,7 @@ export const AuthProvider = ({ children }) => {
                 isLoggedIn,
                 login,
                 logout,
-                appUsername,
+                appName,
                 fetchUsername,
             }}
         >
