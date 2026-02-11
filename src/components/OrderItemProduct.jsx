@@ -4,6 +4,7 @@ const OrderItemProduct = (props) => {
     const [productImage, setProductImage] = useState();
     const [error, setError] = useState();
     const [productDetails, setProductDetails] = useState();
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
 
     /*
     props needed 
@@ -12,8 +13,9 @@ const OrderItemProduct = (props) => {
         - quantity 
 */
 
+    // const url_fetchProductBasedOnId = backendUrl + "/" + props.productId;
     const url_fetchProductBasedOnId =
-        "http://localhost:8080/product/" + props.productId;
+        backendUrl + "/product/" + props.productId;
 
     useEffect(() => {
         const fetchData = async () => {

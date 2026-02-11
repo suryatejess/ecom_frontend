@@ -12,7 +12,9 @@ const OrderSummary = (props) => {
     const { isLoggedIn } = useAuth();
     const { clearCart } = useCart();
 
-    const backendUrl_placeorder = "http://localhost:8080/order/";
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
+    const backendUrl_placeorder = backendUrl + "/order/";
 
     const placeOrder = async () => {
         try {

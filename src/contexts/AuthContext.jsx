@@ -3,7 +3,9 @@ import { useContext, createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const url_backendMe = "http://localhost:8080/auth/me";
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
+    const url_backendMe = backendUrl + "/auth/me";
 
     useEffect(() => {
         checkIfLoggedIn();

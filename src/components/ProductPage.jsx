@@ -16,7 +16,7 @@ const ProductPage = (props) => {
     const { addToCart } = useCart();
     const { isLoggedIn } = useAuth();
 
-    const URL_CART = "http://localhost:8080/cart/";
+    const URL_CART = backendUrl + "/cart/";
 
     useEffect(() => {
         async function fetchProduct() {

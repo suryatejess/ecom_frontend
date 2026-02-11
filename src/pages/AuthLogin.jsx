@@ -13,9 +13,13 @@ function AuthLogin() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
     const navigate = useNavigate();
 
-    const url_backendSigin = "http://localhost:8080/auth/login";
+    const url_backendSigin = backendUrl + "/auth/login";
+
+    const oAuthRedirectLink = backendUrl + "/oauth2/authorization/google";
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -115,9 +119,7 @@ function AuthLogin() {
                     )}
 
                     {/* TODO : modify the ui later */}
-                    <a href="http://localhost:8080/oauth2/authorization/google">
-                        Login with Google
-                    </a>
+                    <a href={oAuthRedirectLink}>Login with Google</a>
 
                     {/* end of the new lines of a href code */}
                 </div>

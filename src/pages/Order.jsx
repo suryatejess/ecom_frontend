@@ -11,6 +11,8 @@ function Order() {
 
     const { isLoggedIn } = useAuth();
 
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
     const toggle = (i) => {
         if (selected == i) {
             return setSelected(null);
@@ -25,7 +27,7 @@ function Order() {
         DELIVERED: "bg-green-100 text-green-700",
     };
 
-    const url_getAllOrders = "http://localhost:8080/order/";
+    const url_getAllOrders = backendUrl + "/order/";
 
     const getAllOrders = async () => {
         try {

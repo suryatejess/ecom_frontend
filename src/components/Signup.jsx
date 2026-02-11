@@ -15,6 +15,8 @@ import { useAuth } from "../contexts/AuthContext";
 const Signup = () => {
     const { isLoggedIn } = useAuth();
 
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
     if (isLoggedIn) {
         return <Navigate to="/" replace />;
     }
@@ -29,7 +31,7 @@ const Signup = () => {
 
     const navigate = useNavigate();
 
-    const url_backendSignup = "http://localhost:8080/auth/createUser";
+    const url_backendSignup = backendUrl + "/auth/createUser";
 
     async function handleSubmit(e) {
         e.preventDefault();

@@ -9,7 +9,9 @@ export const CartProvider = ({ children }) => {
     const [error, setError] = useState();
     const [allProducts, setAllProducts] = useState([]);
 
-    const CART_URL = "http://localhost:8080/cart/";
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
+    const CART_URL = backendUrl + "/cart/";
 
     // 🔹 Derived state
     const cartCount = allProducts.reduce((sum, item) => sum + item.quantity, 0);

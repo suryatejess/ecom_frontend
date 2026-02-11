@@ -18,6 +18,8 @@ function Cart() {
     const [error, setError] = useState("");
     const [subtotal, setSubtotal] = useState(0);
 
+    const backendUrl = import.meta.env.VITE_API_BASE_URL;
+
     useEffect(() => {
         calcTotalCost();
     }, [allProducts]);
@@ -32,7 +34,7 @@ function Cart() {
             const productTotals = await Promise.all(
                 allProducts.map(async (item) => {
                     const productRes = await fetch(
-                        `http://localhost:8080/product/${item.productId}`,
+                        backendUrl + `/product/${item.productId}`,
                     );
 
                     if (!productRes.ok) {
