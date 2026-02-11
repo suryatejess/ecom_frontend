@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 import { useCart } from "../contexts/CartContext";
 import { useAuth } from "../contexts/AuthContext";
+import toast, { Toaster } from "react-hot-toast";
 
 const ProductPage = (props) => {
     const { id } = useParams();
@@ -38,6 +39,11 @@ const ProductPage = (props) => {
     const handleAddToCart = () => {
         addToCart(id, quantity);
         setQuantity(1);
+        notify();
+    };
+
+    const notify = () => {
+        toast.success("Product added to cart");
     };
 
     const decrementQuantity = () => {
@@ -78,6 +84,8 @@ const ProductPage = (props) => {
 
                         {/* down */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8 items-start">
+                            <Toaster />
+
                             {/* image  */}
                             <div className="bg-gray-100 rounded-xl p-6 flex items-center justify-center">
                                 <img
@@ -138,6 +146,7 @@ const ProductPage = (props) => {
                                     >
                                         Add to Cart
                                     </button> */}
+
                                     <button
                                         onClick={handleAddToCart}
                                         disabled={!isLoggedIn}
